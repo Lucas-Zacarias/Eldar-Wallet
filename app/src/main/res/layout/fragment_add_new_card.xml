@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.addnewcard.AddNewCardFragment">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <TextView
+          android:id="@+id/tvAddNewCardTitle"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:text="@string/complete_to_add_new_card"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          android:layout_margin="20dp"
+          android:textAlignment="center"
+          android:textStyle="italic"
+          android:textSize="20sp"
+          android:textColor="@color/green"/>
+
+      <ImageView
+          android:id="@+id/ivCardImage"
+          android:layout_width="200dp"
+          android:layout_height="150dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tvAddNewCardTitle"
+          android:layout_margin="20dp"
+          android:src="@drawable/blank_card"
+          android:contentDescription="@string/card_image"/>
+
+      <ScrollView
+          android:id="@+id/scrollSignUp"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toRightOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/ivCardImage"
+          app:layout_constraintBottom_toBottomOf="parent"
+          android:layout_marginTop="5dp"
+          android:orientation="vertical">
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <com.google.android.material.textfield.TextInputLayout
+                  android:id="@+id/etName"
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:hint="@string/name"
+                  android:inputType="text"
+                  app:boxStrokeColor="@color/blue"
+                  app:hintTextColor="@color/blue"
+                  app:boxCornerRadiusTopStart="10dp"
+                  app:boxCornerRadiusTopEnd="10dp"
+                  app:boxCornerRadiusBottomStart="10dp"
+                  app:boxCornerRadiusBottomEnd="10dp"
+                  android:layout_margin="20dp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="parent">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"/>
+
+              </com.google.android.material.textfield.TextInputLayout>
+
+              <com.google.android.material.textfield.TextInputLayout
+                  android:id="@+id/etSurname"
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:hint="@string/surname"
+                  android:inputType="text"
+                  app:boxStrokeColor="@color/blue"
+                  app:hintTextColor="@color/blue"
+                  app:boxCornerRadiusTopStart="10dp"
+                  app:boxCornerRadiusTopEnd="10dp"
+                  app:boxCornerRadiusBottomStart="10dp"
+                  app:boxCornerRadiusBottomEnd="10dp"
+                  android:layout_margin="20dp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toBottomOf="@id/etName">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"/>
+
+              </com.google.android.material.textfield.TextInputLayout>
+
+              <com.google.android.material.textfield.TextInputLayout
+                  android:id="@+id/etNumber"
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:hint="@string/number"
+                  android:inputType="number"
+                  app:boxStrokeColor="@color/blue"
+                  app:hintTextColor="@color/blue"
+                  android:layout_margin="20dp"
+                  app:boxCornerRadiusTopStart="10dp"
+                  app:boxCornerRadiusTopEnd="10dp"
+                  app:boxCornerRadiusBottomStart="10dp"
+                  app:boxCornerRadiusBottomEnd="10dp"
+                  app:layout_constraintTop_toBottomOf="@id/etSurname"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"/>
+
+              </com.google.android.material.textfield.TextInputLayout>
+
+              <com.google.android.material.textfield.TextInputLayout
+                  android:id="@+id/etExpirationMonth"
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  android:layout_width="0dp"
+                  android:layout_height="match_parent"
+                  android:hint="@string/expiration_month"
+                  android:inputType="number"
+                  app:boxStrokeColor="@color/blue"
+                  app:hintTextColor="@color/blue"
+                  android:layout_margin="20dp"
+                  app:boxCornerRadiusTopStart="10dp"
+                  app:boxCornerRadiusTopEnd="10dp"
+                  app:boxCornerRadiusBottomStart="10dp"
+                  app:boxCornerRadiusBottomEnd="10dp"
+                  app:layout_constraintTop_toBottomOf="@id/etNumber"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toStartOf="@id/etExpirationYear">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"/>
+
+              </com.google.android.material.textfield.TextInputLayout>
+
+              <com.google.android.material.textfield.TextInputLayout
+                  android:id="@+id/etExpirationYear"
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  android:layout_width="0dp"
+                  android:layout_height="match_parent"
+                  android:hint="@string/expiration_year"
+                  android:inputType="number"
+                  app:boxStrokeColor="@color/blue"
+                  app:hintTextColor="@color/blue"
+                  android:layout_margin="20dp"
+                  app:boxCornerRadiusTopStart="10dp"
+                  app:boxCornerRadiusTopEnd="10dp"
+                  app:boxCornerRadiusBottomStart="10dp"
+                  app:boxCornerRadiusBottomEnd="10dp"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toEndOf="@id/etExpirationMonth"
+                  app:layout_constraintTop_toBottomOf="@id/etNumber">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent" />
+
+              </com.google.android.material.textfield.TextInputLayout>
+
+              <com.google.android.material.textfield.TextInputLayout
+                  android:id="@+id/etCVC"
+                  style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:hint="@string/cvc"
+                  android:inputType="textPassword"
+                  app:boxStrokeColor="@color/blue"
+                  app:hintTextColor="@color/blue"
+                  app:passwordToggleEnabled="true"
+                  android:layout_margin="20dp"
+                  app:boxCornerRadiusTopStart="10dp"
+                  app:boxCornerRadiusTopEnd="10dp"
+                  app:boxCornerRadiusBottomStart="10dp"
+                  app:boxCornerRadiusBottomEnd="10dp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toBottomOf="@id/etExpirationYear">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:inputType="textPassword"/>
+
+              </com.google.android.material.textfield.TextInputLayout>
+
+              <com.google.android.material.button.MaterialButton
+                  android:id="@+id/mbAddNewCard"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:backgroundTint="@color/light_green"
+                  android:text="@string/add"
+                  android:textAllCaps="false"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toBottomOf="@id/etCVC"
+                  android:textColor="@color/black"
+                  android:layout_marginHorizontal="40dp"
+                  android:layout_marginTop="20dp"
+                  app:cornerRadius="10dp"
+                  android:padding="15dp" />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+      </ScrollView>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

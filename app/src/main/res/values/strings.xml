@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Eldar Wallet</string>
+    <string name="home">Home</string>
+    <string name="card">Tarjeta</string>
+    <string name="your_qr_code">Tu QR</string>
+    <string name="app_logo">Logo de la app</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="log_in">Iniciar Sesión</string>
+    <string name="not_have_account">¿No tenés cuenta?</string>
+    <string name="have_account">¿Ya tenés una cuenta?</string>
+    <string name="sign_up">Registrarme</string>
+    <string name="name">Nombre</string>
+    <string name="surname">Apellido</string>
+    <string name="confirm_email">Confirmar email</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="number">Número</string>
+    <string name="expiration_month">Mes</string>
+    <string name="expiration_year">Año</string>
+    <string name="cvc">Código de seguridad</string>
+    <string name="balance">Saldo</string>
+    <string name="your_cards">Tus tarjetas</string>
+    <string name="card_image">Imagen de tarjeta</string>
+    <string name="example_hided_card_number">**** **** **** 1234</string>
+    <string name="complete_to_add_new_card">Completá para añadir una nueva tarjeta</string>
+    <string name="add">Añadir</string>
+</resources>

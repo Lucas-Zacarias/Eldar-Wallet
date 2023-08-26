@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.EldarWallet" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!--status bar color-->
+        <item name="android:colorPrimaryDark">@color/green</item>
+    </style>
+
+</resources>
