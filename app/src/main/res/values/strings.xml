@@ -24,4 +24,9 @@
     <string name="example_hided_card_number">**** **** **** 1234</string>
     <string name="complete_to_add_new_card">Completá para añadir una nueva tarjeta</string>
     <string name="add">Añadir</string>
+    <string name="prefs_file">com.eldarwallet.PREFERENCES_FILE_KEY</string>
+    <string name="user_default_balance">$0</string>
+    <string name="hello">"Hola "</string>
+    <string name="log_out">Cerrar Sesión</string>
+    <string name="button_to_close">Botón para cerrar ventana</string>
 </resources>

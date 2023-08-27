@@ -11,7 +11,9 @@ import com.eldarwallet.databinding.ActivityHomeBinding
 import com.eldarwallet.ui.addnewcard.AddNewCardFragment
 import com.eldarwallet.ui.qr.GenerateQRFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var bottomNavigationView: BottomNavigationView
