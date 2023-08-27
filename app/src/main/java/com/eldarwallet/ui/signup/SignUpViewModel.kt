@@ -25,7 +25,7 @@ class SignUpViewModel @Inject constructor(
             val result = signUpUseCase.signUp(userSignUp)
 
             if(result == LoginResult.Success) {
-                signUpUseCase.saveUserSession(userSignUp)
+                signUpUseCase.saveUserSession(userSignUp.email)
             }
 
             _signUpState.value = result

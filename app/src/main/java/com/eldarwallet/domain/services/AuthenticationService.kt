@@ -7,6 +7,6 @@ interface AuthenticationService {
 
     suspend fun createAccount(user: User): LoginResult
 
-    suspend fun login(email: String, password: ByteArray): Pair<LoginResult, Pair<String?, String?>>
+    suspend fun login(email: String, password: ByteArray): LoginResult
 
 }

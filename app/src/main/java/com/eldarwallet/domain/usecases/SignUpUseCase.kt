@@ -5,11 +5,13 @@ import androidx.core.util.PatternsCompat
 import com.eldarwallet.domain.models.LoginResult
 import com.eldarwallet.domain.models.UserSignUp
 import com.eldarwallet.domain.services.AuthenticationService
+import com.eldarwallet.domain.services.RoomDatabaseService
 import javax.inject.Inject
 
 class SignUpUseCase @Inject constructor(
     sharedPrefs: SharedPreferences,
-    private val authenticationService: AuthenticationService
+    private val authenticationService: AuthenticationService,
+    private val roomDatabaseService: RoomDatabaseService
 ) {
 
     private val editor = sharedPrefs.edit()
@@ -28,9 +30,11 @@ class SignUpUseCase @Inject constructor(
         return authenticationService.createAccount(userSignUp.mapToUser())
     }
 
-    fun saveUserSession(userSignUp: UserSignUp) {
-        editor.putString("name", userSignUp.name).apply()
-        editor.putString("surname", userSignUp.surname).apply()
+    suspend fun saveUserSession(email: String) {
+        val userData = roomDatabaseService.getUserData(email)
+        editor.putString("email", email).apply()
+        editor.putString("name", userData.first).apply()
+        editor.putString("surname", userData.second).apply()
     }
 
     private fun validateFields(userSignUp: UserSignUp): Boolean {

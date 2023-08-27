@@ -11,7 +11,7 @@ class AuthenticationServiceImpl @Inject constructor(
     private val userDAO: UserDAO
 ): AuthenticationService {
     override suspend fun createAccount(user: User): LoginResult {
-        return if(userDAO.verifyAccountExistence(user.email)) {
+        return if(userDAO.verifyAccountExistenceByEmail(user.email)) {
             LoginResult.ExistingUser
         }else{
             userDAO.insertNewUser(
@@ -26,13 +26,11 @@ class AuthenticationServiceImpl @Inject constructor(
         }
     }
 
-    override suspend fun login(email: String, password: ByteArray): Pair<LoginResult, Pair<String?, String?>> {
-        val userData = userDAO.getUserData(email, password)
-
-        return if(userData != null) {
-            Pair(LoginResult.Success, Pair(userData.name, userData.surname))
-        }else{
-            Pair(LoginResult.UserNotFound, Pair(null, null))
+    override suspend fun login(email: String, password: ByteArray): LoginResult {
+        return if(userDAO.verifyAccountExistenceByEmailAndPassword(email, password)) {
+            LoginResult.Success
+        } else {
+            LoginResult.UserNotFound
         }
     }
 }

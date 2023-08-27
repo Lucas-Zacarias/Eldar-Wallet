@@ -22,7 +22,13 @@ class LogInViewModel @Inject constructor(
 
     fun validateLogIn(userLogIn: UserLogIn) {
         viewModelScope.launch {
-            _logInState.value = logInUseCase.logIn(userLogIn)
+            val result = logInUseCase.logIn(userLogIn)
+
+            if(result == LoginResult.Success) {
+                logInUseCase.saveUserSession(userLogIn.email)
+            }
+
+            _logInState.value = result
         }
     }
 }

@@ -81,6 +81,7 @@ dependencies {
 
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:$dagger_hilt_version")
+    implementation("androidx.fragment:fragment-ktx:1.5.7")
     kapt("com.google.dagger:hilt-android-compiler:$dagger_hilt_version")
 
     //Room

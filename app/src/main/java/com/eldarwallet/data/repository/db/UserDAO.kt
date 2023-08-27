@@ -10,9 +10,12 @@ interface UserDAO {
     @Insert
     suspend fun insertNewUser(userTable: UserTable)
 
-    @Query("SELECT * FROM USER WHERE email = :email AND password = :password")
-    suspend fun getUserData(email: String, password: ByteArray): UserTable?
+    @Query("SELECT * FROM USER WHERE email = :email")
+    suspend fun getUserData(email: String): UserTable
 
     @Query("SELECT EXISTS (SELECT * FROM USER WHERE email = :email)")
-    suspend fun verifyAccountExistence(email: String): Boolean
+    suspend fun verifyAccountExistenceByEmail(email: String): Boolean
+
+    @Query("SELECT EXISTS (SELECT * FROM USER WHERE email = :email AND password = :password)")
+    suspend fun verifyAccountExistenceByEmailAndPassword(email: String, password: ByteArray): Boolean
 }

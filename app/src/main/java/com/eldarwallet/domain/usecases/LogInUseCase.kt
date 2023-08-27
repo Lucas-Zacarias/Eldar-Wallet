@@ -5,11 +5,13 @@ import androidx.core.util.PatternsCompat
 import com.eldarwallet.domain.models.LoginResult
 import com.eldarwallet.domain.models.UserLogIn
 import com.eldarwallet.domain.services.AuthenticationService
+import com.eldarwallet.domain.services.RoomDatabaseService
 import javax.inject.Inject
 
 class LogInUseCase @Inject constructor(
     sharedPreferences: SharedPreferences,
-    private val authenticationService: AuthenticationService
+    private val authenticationService: AuthenticationService,
+    private val roomDatabaseService: RoomDatabaseService
 ) {
     private val editor = sharedPreferences.edit()
 
@@ -18,21 +20,14 @@ class LogInUseCase @Inject constructor(
 
         if (!validateEmailFormat(userLogIn.email)) return LoginResult.EmailInvalid
 
-        val loginResult = authenticationService.login(userLogIn.email, userLogIn.encryptPassword())
-
-        if (loginResult.second.first != null && loginResult.second.second != null) {
-            saveUserSession(
-                loginResult.second.first.toString(),
-                loginResult.second.second.toString()
-            )
-        }
-
-        return loginResult.first
+        return authenticationService.login(userLogIn.email, userLogIn.encryptPassword())
     }
 
-    private fun saveUserSession(name: String, surname: String) {
-        editor.putString("name", name).apply()
-        editor.putString("surname", surname).apply()
+    suspend fun saveUserSession(email: String) {
+        val userData = roomDatabaseService.getUserData(email)
+        editor.putString("email", email).apply()
+        editor.putString("name", userData.first).apply()
+        editor.putString("surname", userData.second).apply()
     }
 
     private fun validateFields(userLogIn: UserLogIn): Boolean {

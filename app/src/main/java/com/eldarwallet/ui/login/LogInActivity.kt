@@ -86,7 +86,7 @@ class LogInActivity : AppCompatActivity() {
 
     private fun setAlertLogInProblem(message: String) {
         MaterialAlertDialogBuilder(this)
-            .setTitle("No pudimos crear tu cuenta")
+            .setTitle("No pudimos acceder a tu cuenta")
             .setMessage("Revisá: $message")
             .setPositiveButton("OK"){dialog, _ ->
                 dialog.dismiss()

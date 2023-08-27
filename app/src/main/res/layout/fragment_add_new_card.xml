@@ -56,7 +56,6 @@
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:hint="@string/name"
-                  android:inputType="text"
                   app:boxStrokeColor="@color/blue"
                   app:hintTextColor="@color/blue"
                   app:boxCornerRadiusTopStart="10dp"
@@ -70,7 +69,8 @@
 
                   <com.google.android.material.textfield.TextInputEditText
                       android:layout_width="match_parent"
-                      android:layout_height="match_parent"/>
+                      android:layout_height="match_parent"
+                      android:inputType="textCapSentences"/>
 
               </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +80,6 @@
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:hint="@string/surname"
-                  android:inputType="text"
                   app:boxStrokeColor="@color/blue"
                   app:hintTextColor="@color/blue"
                   app:boxCornerRadiusTopStart="10dp"
@@ -94,7 +93,8 @@
 
                   <com.google.android.material.textfield.TextInputEditText
                       android:layout_width="match_parent"
-                      android:layout_height="match_parent"/>
+                      android:layout_height="match_parent"
+                      android:inputType="textCapSentences"/>
 
               </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,7 +104,6 @@
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:hint="@string/number"
-                  android:inputType="number"
                   app:boxStrokeColor="@color/blue"
                   app:hintTextColor="@color/blue"
                   android:layout_margin="20dp"
@@ -118,7 +117,9 @@
 
                   <com.google.android.material.textfield.TextInputEditText
                       android:layout_width="match_parent"
-                      android:layout_height="match_parent"/>
+                      android:layout_height="match_parent"
+                      android:inputType="number"
+                      android:maxLength="16"/>
 
               </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,7 +129,6 @@
                   android:layout_width="0dp"
                   android:layout_height="match_parent"
                   android:hint="@string/expiration_month"
-                  android:inputType="number"
                   app:boxStrokeColor="@color/blue"
                   app:hintTextColor="@color/blue"
                   android:layout_margin="20dp"
@@ -142,7 +142,9 @@
 
                   <com.google.android.material.textfield.TextInputEditText
                       android:layout_width="match_parent"
-                      android:layout_height="match_parent"/>
+                      android:layout_height="match_parent"
+                      android:inputType="number"
+                      android:maxLength="2"/>
 
               </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,7 +154,6 @@
                   android:layout_width="0dp"
                   android:layout_height="match_parent"
                   android:hint="@string/expiration_year"
-                  android:inputType="number"
                   app:boxStrokeColor="@color/blue"
                   app:hintTextColor="@color/blue"
                   android:layout_margin="20dp"
@@ -166,7 +167,9 @@
 
                   <com.google.android.material.textfield.TextInputEditText
                       android:layout_width="match_parent"
-                      android:layout_height="match_parent" />
+                      android:layout_height="match_parent"
+                      android:inputType="number"
+                      android:maxLength="4"/>
 
               </com.google.android.material.textfield.TextInputLayout>
 
@@ -176,7 +179,6 @@
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:hint="@string/cvc"
-                  android:inputType="textPassword"
                   app:boxStrokeColor="@color/blue"
                   app:hintTextColor="@color/blue"
                   app:passwordToggleEnabled="true"
@@ -192,7 +194,8 @@
                   <com.google.android.material.textfield.TextInputEditText
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
-                      android:inputType="textPassword"/>
+                      android:inputType="numberPassword"
+                      android:maxLength="4"/>
 
               </com.google.android.material.textfield.TextInputLayout>
 
