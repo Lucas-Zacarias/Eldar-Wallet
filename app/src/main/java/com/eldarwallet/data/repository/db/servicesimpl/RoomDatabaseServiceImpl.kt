@@ -54,7 +54,7 @@ class RoomDatabaseServiceImpl @Inject constructor(
             cardData.ownerSurname,
             cardData.cardNumber,
             cardData.cardExpirationMonth,
-            cardData.cardExpirationMonth,
+            cardData.cardExpirationYear,
             cardData.cardCVC,
             cardData.cardType
         )

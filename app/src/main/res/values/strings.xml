@@ -29,4 +29,10 @@
     <string name="hello">"Hola "</string>
     <string name="log_out">Cerrar Sesión</string>
     <string name="button_to_close">Botón para cerrar ventana</string>
+    <string name="icon_to_go_back">Ícono para volver hacia atrás</string>
+    <string name="card_data">Datos de la tarjeta</string>
+    <string name="button_to_flip_card">Botón para voltear tarjeta</string>
+    <string name="pay_with_nfc">Pagar con NFC</string>
+    <string name="owner">Titular: %s %s</string>
+    <string name="cvc_mayus">CVC %s</string>
 </resources>
