@@ -1,5 +1,6 @@
 package com.eldarwallet.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.eldarwallet.R
 import com.eldarwallet.databinding.FragmentHomeBinding
+import com.eldarwallet.domain.models.Card
 import com.eldarwallet.domain.usecases.HomeUseCase
+import com.eldarwallet.ui.adapter.CardsAdapter
 import com.eldarwallet.ui.login.LogInActivity
+import com.eldarwallet.ui.paywithcard.PayWithCardActivity
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,6 +33,8 @@ class HomeFragment : Fragment() {
     private lateinit var userGreeting: TextView
     private lateinit var btnClose: ImageView
     private lateinit var btnLogOut: MaterialButton
+    private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var cardRV: RecyclerView
 
     @Inject
     lateinit var homeUseCase: HomeUseCase
@@ -43,6 +53,7 @@ class HomeFragment : Fragment() {
 
         getViews()
         setViews()
+        setObservables()
         setListeners()
     }
 
@@ -57,6 +68,34 @@ class HomeFragment : Fragment() {
         setUserInitials()
         setUserGreeting()
     }
+
+    private fun setObservables() {
+        homeViewModel.getCardList()
+
+        homeViewModel.cardList.observe(viewLifecycleOwner){
+            if(it.isNotEmpty()) {
+                setUpRecyclerCards(it)
+            }
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setUpRecyclerCards(cards: List<Card>) {
+        cardRV = binding.rvCards
+        cardRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        val adapter = CardsAdapter(cards){cardNumber -> goToPay(cardNumber)}
+        cardRV.adapter = adapter
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun goToPay(cardNumber: ByteArray) {
+        val intent = Intent(requireContext(), PayWithCardActivity()::class.java)
+        intent.putExtra("card", cardNumber)
+
+        startActivity(intent)
+    }
+
 
     private fun setUserInitials() {
         userInitials.text = homeUseCase.getUserInitials()

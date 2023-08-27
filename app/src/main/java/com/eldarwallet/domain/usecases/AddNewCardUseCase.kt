@@ -1,14 +1,17 @@
 package com.eldarwallet.domain.usecases
 
 import android.content.SharedPreferences
+import com.eldarwallet.domain.models.Card
 import com.eldarwallet.domain.models.CardInput
 import com.eldarwallet.domain.models.CardType
 import com.eldarwallet.domain.models.NewCardResult
+import com.eldarwallet.domain.services.RoomDatabaseService
 import java.time.LocalDate
 import javax.inject.Inject
 
 class AddNewCardUseCase @Inject constructor(
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences,
+    private val roomDatabaseService: RoomDatabaseService
 ) {
 
     suspend fun addNewCard(cardInput: CardInput): NewCardResult {
@@ -26,7 +29,7 @@ class AddNewCardUseCase @Inject constructor(
 
         if (!validateCardType(cardInput.number)) return NewCardResult.CardTypeInvalid
 
-        return NewCardResult.Success
+        return roomDatabaseService.addNewCard(getUserId(), cardInput.mapToCard())
     }
 
     fun setCardType(cardNumber: String): CardType {
@@ -103,5 +106,15 @@ class AddNewCardUseCase @Inject constructor(
     private fun validateCardType(cardNumber: String): Boolean {
         return (cardNumber.length in 15..16 &&
                 cardNumber.first().toString() in listOf("3", "4", "5"))
+    }
+
+    private suspend fun getUserId(): Int {
+        val userEmail = sharedPreferences.getString("email", null)
+
+        userEmail?.let{
+            return roomDatabaseService.getUserId(userEmail)
+        }
+
+        return 0
     }
 }

@@ -1,8 +1,9 @@
-package com.eldarwallet.data.repository.db
+package com.eldarwallet.data.repository.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.eldarwallet.data.repository.db.tables.UserTable
 
 @Dao
 interface UserDAO {
@@ -18,4 +19,7 @@ interface UserDAO {
 
     @Query("SELECT EXISTS (SELECT * FROM USER WHERE email = :email AND password = :password)")
     suspend fun verifyAccountExistenceByEmailAndPassword(email: String, password: ByteArray): Boolean
+
+    @Query("SELECT USER.id FROM USER WHERE email = :email")
+    suspend fun getUserIdByEmail(email: String): Int
 }

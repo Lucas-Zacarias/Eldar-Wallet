@@ -3,7 +3,8 @@ package com.eldarwallet.di
 import android.content.Context
 import androidx.room.Room
 import com.eldarwallet.data.repository.db.EldarWalletDB
-import com.eldarwallet.data.repository.db.UserDAO
+import com.eldarwallet.data.repository.db.dao.CardDAO
+import com.eldarwallet.data.repository.db.dao.UserDAO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,5 +28,10 @@ object RoomModule {
     @Provides
     fun provideUserDAO(eldarWalletDB: EldarWalletDB) : UserDAO {
         return eldarWalletDB.userDAO()
+    }
+
+    @Provides
+    fun provideCardDAO(eldarWalletDB: EldarWalletDB): CardDAO {
+        return eldarWalletDB.cardDAO()
     }
 }

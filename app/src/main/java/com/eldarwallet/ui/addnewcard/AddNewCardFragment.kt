@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.eldarwallet.R
@@ -125,11 +126,11 @@ class AddNewCardFragment : Fragment() {
 
     private fun showResultAddNewCard(result: NewCardResult) {
         when (result) {
-            NewCardResult.Success -> {cleanFields()/*new card added, show any messagge and clean fields to add another card}*/ }
+            NewCardResult.Success -> { cleanFields() }
 
             NewCardResult.EmptyFields -> setAlertAddNewCardProblem("Completar todos los campos")
 
-            NewCardResult.OwnerNameInvalid -> setAlertAddNewCardProblem("Cargar la tarjeta a tu nombre")
+            NewCardResult.OwnerNameInvalid, NewCardResult.OwnerInvalid -> setAlertAddNewCardProblem("Cargar la tarjeta a tu nombre")
 
             NewCardResult.NumberInvalid, NewCardResult.CardTypeInvalid -> setAlertAddNewCardProblem("Usar un número de tarjeta válido")
 
@@ -139,11 +140,14 @@ class AddNewCardFragment : Fragment() {
 
             NewCardResult.CVCLengthInvalid -> setAlertAddNewCardProblem("Usar un código de seguridad válido")
 
-            else -> {}
+            NewCardResult.CardAlreadyAdded -> setAlertAddNewCardProblem("Tarjeta ya cargada")
+
+            NewCardResult.Error  -> setAlertAddNewCardProblem("No pudimos detectar el problema")
         }
     }
 
     private fun cleanFields() {
+        Toast.makeText(requireContext(), "Tarjeta añadida", Toast.LENGTH_LONG).show()
         cardImage.setImageResource(R.drawable.blank_card)
         name.setText("")
         surname.setText("")

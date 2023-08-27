@@ -1,4 +1,4 @@
-package com.eldarwallet.data.repository.db
+package com.eldarwallet.data.repository.db.tables
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,6 +1,7 @@
 package com.eldarwallet.di
 
-import com.eldarwallet.data.repository.db.UserDAO
+import com.eldarwallet.data.repository.db.dao.CardDAO
+import com.eldarwallet.data.repository.db.dao.UserDAO
 import com.eldarwallet.data.repository.db.servicesimpl.AuthenticationServiceImpl
 import com.eldarwallet.data.repository.db.servicesimpl.RoomDatabaseServiceImpl
 import com.eldarwallet.domain.services.AuthenticationService
@@ -23,8 +24,9 @@ object InterfaceModule {
 
     @Provides
     fun getRoomDatabaseService(
-        userDAO: UserDAO
+        userDAO: UserDAO,
+        cardDAO: CardDAO
     ): RoomDatabaseService {
-        return RoomDatabaseServiceImpl(userDAO)
+        return RoomDatabaseServiceImpl(userDAO, cardDAO)
     }
 }

@@ -1,7 +1,7 @@
 package com.eldarwallet.data.repository.db.servicesimpl
 
-import com.eldarwallet.data.repository.db.UserDAO
-import com.eldarwallet.data.repository.db.UserTable
+import com.eldarwallet.data.repository.db.dao.UserDAO
+import com.eldarwallet.data.repository.db.tables.UserTable
 import com.eldarwallet.domain.models.LoginResult
 import com.eldarwallet.domain.models.User
 import com.eldarwallet.domain.services.AuthenticationService
