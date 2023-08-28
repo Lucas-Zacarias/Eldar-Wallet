@@ -61,7 +61,7 @@ dependencies {
     val room_version = "2.5.2"
     val retrofit_version = "2.9.0"
     val okhttp_version = "3.14.9"
-    val gson_version = "2.10.1"
+    val gson_version = "2.9.0"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
@@ -92,6 +92,7 @@ dependencies {
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
 
     //OkHttp
     implementation("com.squareup.okhttp3:okhttp:$okhttp_version")

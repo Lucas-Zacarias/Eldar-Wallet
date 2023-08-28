@@ -1,9 +1,12 @@
 package com.eldarwallet.di
 
+import com.eldarwallet.data.api.QRGenerateGateway
+import com.eldarwallet.data.api.serviceImpl.ApiServiceImpl
 import com.eldarwallet.data.repository.db.dao.CardDAO
 import com.eldarwallet.data.repository.db.dao.UserDAO
 import com.eldarwallet.data.repository.db.servicesimpl.AuthenticationServiceImpl
 import com.eldarwallet.data.repository.db.servicesimpl.RoomDatabaseServiceImpl
+import com.eldarwallet.domain.services.ApiService
 import com.eldarwallet.domain.services.AuthenticationService
 import com.eldarwallet.domain.services.RoomDatabaseService
 import dagger.Module
@@ -28,5 +31,12 @@ object InterfaceModule {
         cardDAO: CardDAO
     ): RoomDatabaseService {
         return RoomDatabaseServiceImpl(userDAO, cardDAO)
+    }
+
+    @Provides
+    fun getApiService(
+        qrGenerateGateway: QRGenerateGateway
+    ): ApiService {
+        return ApiServiceImpl(qrGenerateGateway)
     }
 }
