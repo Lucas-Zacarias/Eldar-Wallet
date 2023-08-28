@@ -38,4 +38,5 @@
     <string name="show_qr_code_to_receive_money">Mostrá este código QR para que te abonen</string>
     <string name="charging_your_qr">Cargando tu QR...</string>
     <string name="qr_code">Código QR</string>
+    <string name="no_cards_added">No tenés tarjetas añadidas</string>
 </resources>

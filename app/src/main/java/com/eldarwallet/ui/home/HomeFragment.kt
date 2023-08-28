@@ -75,6 +75,10 @@ class HomeFragment : Fragment() {
         homeViewModel.cardList.observe(viewLifecycleOwner){
             if(it.isNotEmpty()) {
                 setUpRecyclerCards(it)
+                hideNoCards()
+                showRVCards()
+            }else{
+                showNoCards()
             }
         }
     }
@@ -134,5 +138,17 @@ class HomeFragment : Fragment() {
             startActivity(Intent(activity, LogInActivity::class.java))
             requireActivity().finish()
         }
+    }
+
+    private fun hideNoCards() {
+        binding.clNoCardsAdded.visibility = View.GONE
+    }
+
+    private fun showNoCards() {
+        binding.clNoCardsAdded.visibility = View.VISIBLE
+    }
+
+    private fun showRVCards() {
+        binding.rvCards.visibility = View.VISIBLE
     }
 }

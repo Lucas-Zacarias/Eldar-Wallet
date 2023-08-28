@@ -1,7 +1,6 @@
 package com.eldarwallet.domain.usecases
 
 import android.content.SharedPreferences
-import com.eldarwallet.domain.models.Card
 import com.eldarwallet.domain.models.CardInput
 import com.eldarwallet.domain.models.CardType
 import com.eldarwallet.domain.models.NewCardResult
@@ -17,7 +16,7 @@ class AddNewCardUseCase @Inject constructor(
     suspend fun addNewCard(cardInput: CardInput): NewCardResult {
         if (!validateFields(cardInput)) return NewCardResult.EmptyFields
 
-        if (!validateMonth(cardInput.month)) return NewCardResult.MonthInvalid
+        if (!validateMonth(cardInput.month, cardInput.year)) return NewCardResult.MonthInvalid
 
         if (!validateYear(cardInput.year)) return NewCardResult.YearInvalid
 
@@ -59,11 +58,14 @@ class AddNewCardUseCase @Inject constructor(
                 cardInput.type.toString().isEmpty())
     }
 
-    private fun validateMonth(monthExpiration: String): Boolean {
+    private fun validateMonth(monthExpiration: String, yearExpiration: String): Boolean {
         val today = LocalDate.now()
         val month = today.monthValue
+        val year = today.year
 
-        return monthExpiration.toInt() in month..12
+        return if (yearExpiration.toInt() > year) {
+            true
+        } else yearExpiration.toInt() == year && monthExpiration.toInt() > month
     }
 
     private fun validateYear(yearExpiration: String): Boolean {
