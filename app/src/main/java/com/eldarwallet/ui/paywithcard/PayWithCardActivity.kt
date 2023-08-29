@@ -2,6 +2,7 @@ package com.eldarwallet.ui.paywithcard
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
+import android.nfc.NfcAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageView
@@ -13,6 +14,8 @@ import com.eldarwallet.R
 import com.eldarwallet.databinding.ActivityPayWithCardBinding
 import com.eldarwallet.domain.models.CardInput
 import com.eldarwallet.domain.models.CardType
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +33,7 @@ class PayWithCardActivity : AppCompatActivity() {
     private lateinit var cardNumber: TextView
     private lateinit var expirationDate: TextView
     private lateinit var cvcNumber: TextView
+    private lateinit var btnPayWithNFC: MaterialButton
 
     private val payWithCardViewModel: PayWithCardViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +59,7 @@ class PayWithCardActivity : AppCompatActivity() {
         cardNumber = binding.tvCardNumber
         expirationDate = binding.tvCardExpirationDate
         cvcNumber = binding.tvCardCVC
+        btnPayWithNFC = binding.mbPayWithNFC
     }
 
     private fun setObservable() {
@@ -125,11 +130,40 @@ class PayWithCardActivity : AppCompatActivity() {
 
     private fun setListeners() {
         goBack()
+        payWithNFC()
     }
 
     private fun goBack() {
         btnBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun payWithNFC() {
+        btnPayWithNFC.setOnClickListener {
+            val nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+            val isAvailable = nfcAdapter != null
+            val isEnabled = nfcAdapter?.isEnabled == true
+
+            if(isAvailable){
+                if(isEnabled){
+                    showNFCStatus("Buscando dispositivo para pagar...")
+                }else{
+                    showNFCStatus("No tenés el NFC encendido")
+                }
+            }else{
+                showNFCStatus("Tu dispositivo no cuenta con NFC")
+            }
+        }
+    }
+
+    private fun showNFCStatus(message: String) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Pagar con NFC")
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }
