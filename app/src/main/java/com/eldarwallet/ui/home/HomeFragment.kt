@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +18,7 @@ import com.eldarwallet.domain.usecases.HomeUseCase
 import com.eldarwallet.ui.adapter.CardsAdapter
 import com.eldarwallet.ui.login.LogInActivity
 import com.eldarwallet.ui.paywithcard.PayWithCardActivity
-import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -31,8 +28,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var userInitials: TextView
     private lateinit var userGreeting: TextView
-    private lateinit var btnClose: ImageView
-    private lateinit var btnLogOut: MaterialButton
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var cardRV: RecyclerView
 
@@ -60,8 +55,6 @@ class HomeFragment : Fragment() {
     private fun getViews() {
         userInitials = binding.tvUserInitials
         userGreeting = binding.tvUserGreeting
-        btnClose = binding.ivClose
-        btnLogOut = binding.mbLogOut
     }
 
     private fun setViews() {
@@ -112,32 +105,31 @@ class HomeFragment : Fragment() {
 
     private fun setListeners() {
         openWindowToLogOut()
-        closeWindowToLogOut()
-        logOut()
     }
 
     private fun openWindowToLogOut() {
         userInitials.setOnClickListener {
-            if(binding.clLogOut.isVisible) {
-                binding.clLogOut.visibility = View.GONE
-            }else{
-                binding.clLogOut.visibility = View.VISIBLE
-            }
+            showAlertLogOff()
         }
     }
 
-    private fun closeWindowToLogOut() {
-        btnClose.setOnClickListener {
-            binding.clLogOut.visibility = View.GONE
-        }
+    private fun showAlertLogOff() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Cerrar Sesión")
+            .setMessage("¿Está seguro que desea cerrar sesión?")
+            .setPositiveButton("Si") { _, _ ->
+                logOut()
+            }
+            .setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun logOut() {
-        btnLogOut.setOnClickListener {
-            homeUseCase.logOut()
-            startActivity(Intent(activity, LogInActivity::class.java))
-            requireActivity().finish()
-        }
+        homeUseCase.logOut()
+        startActivity(Intent(activity, LogInActivity::class.java))
+        requireActivity().finish()
     }
 
     private fun hideNoCards() {
