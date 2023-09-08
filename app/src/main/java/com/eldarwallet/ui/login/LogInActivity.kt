@@ -1,82 +1,44 @@
 package com.eldarwallet.ui.login
 
 import android.content.Intent
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.EditText
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.eldarwallet.databinding.ActivityLogInBinding
-import com.eldarwallet.domain.models.LoginResult
-import com.eldarwallet.domain.models.UserLogIn
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import com.eldarwallet.ui.home.HomeActivity
+import com.eldarwallet.ui.screens.LoginScreen
 import com.eldarwallet.ui.signup.SignUpActivity
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.eldarwallet.ui.theme.EldarWalletTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LogInActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLogInBinding
-    private lateinit var email: EditText
-    private lateinit var password: EditText
-    private lateinit var btnLogIn: MaterialButton
-    private lateinit var btnSignUp: MaterialButton
     private val logInViewModel: LogInViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityLogInBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
-
-        getViews()
-        setListeners()
-        setObserver()
-    }
-
-    private fun getViews() {
-        email = binding.etEmail.editText!!
-        password = binding.etPassword.editText!!
-        btnLogIn = binding.mbLogIn
-        btnSignUp = binding.mbSignUp
-    }
-
-    private fun setListeners() {
-        logIn()
-        goToSignUpActivity()
-    }
-
-    private fun logIn() {
-        btnLogIn.setOnClickListener {
-            logInViewModel.validateLogIn(
-                UserLogIn(
-                    email.text.toString(),
-                    password.text.toString()
+        setContent {
+            EldarWalletTheme {
+                LoginScreen(
+                    signUpEvent = {
+                        goToSignUpActivity()
+                    },
+                    goToHomeEvent = {
+                        goToHome()
+                    },
+                    viewModel = logInViewModel
                 )
-            )
+            }
         }
+
     }
 
     private fun goToSignUpActivity() {
-        btnSignUp.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-        }
-    }
-
-    private fun setObserver() {
-        logInViewModel.logInState.observe(this) { logInResult ->
-            when(logInResult) {
-                LoginResult.Success -> goToHome()
-
-                LoginResult.EmptyFields -> setAlertLogInProblem("Completar todos los campos")
-
-                LoginResult.EmailInvalid -> setAlertLogInProblem("El formato del email, ej: mario.paredes@gmail.com")
-
-                LoginResult.UserNotFound -> setAlertLogInProblem("Tus credenciales")
-
-                else -> {}
-            }
-        }
+        startActivity(Intent(this, SignUpActivity::class.java))
     }
 
     private fun goToHome() {
@@ -84,14 +46,28 @@ class LogInActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun setAlertLogInProblem(message: String) {
-        MaterialAlertDialogBuilder(this)
-            .setTitle("No pudimos acceder a tu cuenta")
-            .setMessage("Revisá: $message")
-            .setPositiveButton("OK"){dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
-
+    @Preview(
+        showBackground = true,
+        name = "Light mode",
+        uiMode = UI_MODE_NIGHT_NO
+    )
+    @Preview(
+        showBackground = true,
+        name = "Night mode",
+        uiMode = UI_MODE_NIGHT_YES
+    )
+    @Composable
+    private fun Preview() {
+        EldarWalletTheme {
+            LoginScreen(
+                signUpEvent = {
+                    goToSignUpActivity()
+                },
+                goToHomeEvent = {
+                    goToHome()
+                },
+                viewModel = logInViewModel
+            )
+        }
     }
 }
