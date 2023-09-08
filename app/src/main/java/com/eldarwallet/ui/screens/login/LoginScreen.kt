@@ -1,4 +1,4 @@
-package com.eldarwallet.ui.screens
+package com.eldarwallet.ui.screens.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
