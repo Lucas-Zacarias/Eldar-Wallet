@@ -111,6 +111,9 @@ dependencies {
 
     //Live data with compose
     implementation("androidx.compose.runtime:runtime-livedata:1.5.1")
+
+    //Lottie animations
+    implementation("com.airbnb.android:lottie-compose:6.0.0")
 }
 
 kapt {

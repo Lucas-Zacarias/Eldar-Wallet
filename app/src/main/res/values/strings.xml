@@ -53,4 +53,10 @@
     <string name="check_password_length">El largo de la contraseña (debe ser de al menos 6 caracteres)</string>
     <string name="try_with_other_email">Probar con otro email</string>
     <string name="problem_not_detected">No pudimos detectar la causa</string>
+    <string name="add_card_in_your_name">Cargar la tarjeta a tu nombre</string>
+    <string name="use_a_valid_card_number">Usar un número de tarjeta a tu nombre</string>
+    <string name="not_use_an_expiration_month_before_the_current_date">No usar un mes de vencimiento anterior a la fecha actual</string>
+    <string name="not_use_an_expiration_year_before_the_current_date">No usar un año de vencimiento anterior a la fecha actual</string>
+    <string name="use_a_valid_cvc">Usar un código de seguridad válido</string>
+    <string name="card_already_added">Tarjeta ya cargada</string>
 </resources>
