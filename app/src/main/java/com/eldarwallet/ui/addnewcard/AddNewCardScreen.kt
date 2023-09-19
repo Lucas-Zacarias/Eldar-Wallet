@@ -1,4 +1,4 @@
-package com.eldarwallet.ui.screens.addnewcard
+package com.eldarwallet.ui.addnewcard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -51,11 +51,10 @@ import com.eldarwallet.R
 import com.eldarwallet.domain.models.CardInput
 import com.eldarwallet.domain.models.CardType
 import com.eldarwallet.domain.models.NewCardResult
-import com.eldarwallet.ui.addnewcard.AddNewCardViewModel
-import com.eldarwallet.ui.screens.reusablecomponents.HeightSpacer
-import com.eldarwallet.ui.screens.reusablecomponents.ReusableButton
-import com.eldarwallet.ui.screens.reusablecomponents.ReusableDialog
-import com.eldarwallet.ui.screens.reusablecomponents.ReusableOutlineTextField
+import com.eldarwallet.ui.reusablecomponents.HeightSpacer
+import com.eldarwallet.ui.reusablecomponents.ReusableButton
+import com.eldarwallet.ui.reusablecomponents.ReusableDialog
+import com.eldarwallet.ui.reusablecomponents.ReusableOutlineTextField
 import kotlinx.coroutines.delay
 
 @Composable

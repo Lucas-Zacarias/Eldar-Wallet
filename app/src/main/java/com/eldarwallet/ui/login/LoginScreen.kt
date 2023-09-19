@@ -1,4 +1,4 @@
-package com.eldarwallet.ui.screens.login
+package com.eldarwallet.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,12 +35,11 @@ import androidx.compose.ui.unit.sp
 import com.eldarwallet.R
 import com.eldarwallet.domain.models.LoginResult
 import com.eldarwallet.domain.models.UserLogIn
-import com.eldarwallet.ui.login.LogInViewModel
-import com.eldarwallet.ui.screens.reusablecomponents.HeightSpacer
-import com.eldarwallet.ui.screens.reusablecomponents.ReusableButton
-import com.eldarwallet.ui.screens.reusablecomponents.ReusableDialog
-import com.eldarwallet.ui.screens.reusablecomponents.ReusableOutlineTextField
-import com.eldarwallet.ui.screens.reusablecomponents.WidthSpacer
+import com.eldarwallet.ui.reusablecomponents.HeightSpacer
+import com.eldarwallet.ui.reusablecomponents.ReusableButton
+import com.eldarwallet.ui.reusablecomponents.ReusableDialog
+import com.eldarwallet.ui.reusablecomponents.ReusableOutlineTextField
+import com.eldarwallet.ui.reusablecomponents.WidthSpacer
 
 @Composable
 fun LoginScreen(

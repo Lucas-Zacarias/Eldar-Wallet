@@ -1,4 +1,4 @@
-package com.eldarwallet.ui.screens
+package com.eldarwallet.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -46,9 +46,8 @@ import com.eldarwallet.R
 import com.eldarwallet.domain.models.Card
 import com.eldarwallet.domain.models.CardType
 import com.eldarwallet.domain.usecases.EncryptionUseCase
-import com.eldarwallet.ui.home.HomeViewModel
-import com.eldarwallet.ui.screens.reusablecomponents.ReusableCardItem
-import com.eldarwallet.ui.screens.reusablecomponents.ReusableDialog
+import com.eldarwallet.ui.reusablecomponents.ReusableCardItem
+import com.eldarwallet.ui.reusablecomponents.ReusableDialog
 
 @Composable
 fun HomeScreen(

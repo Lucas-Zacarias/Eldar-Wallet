@@ -1,4 +1,4 @@
-package com.eldarwallet.ui.screens.qr
+package com.eldarwallet.ui.qr
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
@@ -26,7 +26,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.eldarwallet.R
-import com.eldarwallet.ui.qr.GenerateQRViewModel
 
 @Composable
 fun QRScreen(

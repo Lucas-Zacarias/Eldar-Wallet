@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.eldarwallet.ui.home.HomeActivity
-import com.eldarwallet.ui.screens.login.LoginScreen
 import com.eldarwallet.ui.signup.SignUpActivity
 import com.eldarwallet.ui.theme.EldarWalletTheme
 import dagger.hilt.android.AndroidEntryPoint

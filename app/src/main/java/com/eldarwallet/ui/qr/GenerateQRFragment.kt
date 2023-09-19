@@ -8,7 +8,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.eldarwallet.ui.screens.qr.QRScreen
 import com.eldarwallet.ui.theme.EldarWalletTheme
 import dagger.hilt.android.AndroidEntryPoint
 

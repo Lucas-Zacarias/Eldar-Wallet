@@ -1,4 +1,4 @@
-package com.eldarwallet.ui.screens.reusablecomponents
+package com.eldarwallet.ui.reusablecomponents
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

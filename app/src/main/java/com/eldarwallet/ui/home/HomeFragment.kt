@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import com.eldarwallet.domain.usecases.HomeUseCase
 import com.eldarwallet.ui.login.LogInActivity
 import com.eldarwallet.ui.paywithcard.PayWithCardActivity
-import com.eldarwallet.ui.screens.HomeScreen
 import com.eldarwallet.ui.theme.EldarWalletTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

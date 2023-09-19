@@ -1,4 +1,4 @@
-package com.eldarwallet.ui.screens.reusablecomponents
+package com.eldarwallet.ui.reusablecomponents
 
 import android.content.res.Configuration
 import androidx.compose.foundation.shape.RoundedCornerShape
