@@ -26,7 +26,7 @@
     <string name="add">Añadir</string>
     <string name="prefs_file">com.eldarwallet.PREFERENCES_FILE_KEY</string>
     <string name="user_default_balance">$0</string>
-    <string name="hello">"Hola "</string>
+    <string name="hello">"Hola"</string>
     <string name="log_out">Cerrar Sesión</string>
     <string name="button_to_close">Botón para cerrar ventana</string>
     <string name="icon_to_go_back">Ícono para volver hacia atrás</string>
@@ -59,4 +59,7 @@
     <string name="not_use_an_expiration_year_before_the_current_date">No usar un año de vencimiento anterior a la fecha actual</string>
     <string name="use_a_valid_cvc">Usar un código de seguridad válido</string>
     <string name="card_already_added">Tarjeta ya cargada</string>
+    <string name="wallet">Billetera</string>
+    <string name="sign_off">Cerrar Sesión</string>
+    <string name="sign_off_confirm">¿Está seguro que desea cerrar sesión?</string>
 </resources>
