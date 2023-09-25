@@ -1,5 +1,5 @@
 
-# Eldar Wallet
+# Wallet
 
 Challenge técnico. App mobile Android
 
