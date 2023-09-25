@@ -14,7 +14,7 @@ Para descargar este proyecto se puede hacer de 2 formas:
     
 ```bash
   Hacer un git clone de:
-  https://github.com/Lucas-Zacarias/Eldar-Wallet.git
+  https://github.com/Lucas-Zacarias/Wallet.git
 ```    
 ## Usage
 Se debe tener:
