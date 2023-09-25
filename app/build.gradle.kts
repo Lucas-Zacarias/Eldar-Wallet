@@ -114,6 +114,9 @@ dependencies {
 
     //Lottie animations
     implementation("com.airbnb.android:lottie-compose:6.0.0")
+
+    //Splash screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }
 
 kapt {

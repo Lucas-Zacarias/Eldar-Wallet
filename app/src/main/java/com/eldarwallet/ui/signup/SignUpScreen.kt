@@ -145,7 +145,7 @@ fun SignUpScreen(
 private fun LogoApp() {
     Image(
         painter =
-        painterResource(id = R.drawable.eldar_logo_app),
+        painterResource(id = R.drawable.wallet_logo),
         contentDescription =
         stringResource(R.string.app_logo),
         modifier =

@@ -13,4 +13,5 @@
     <color name="light_gray">#808080</color>
     <color name="transparent">#00000000</color>
     <color name="red">#B22626</color>
+    <color name="ic_background">#FFFFFF</color>
 </resources>

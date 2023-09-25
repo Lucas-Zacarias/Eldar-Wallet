@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Eldar Wallet</string>
+    <string name="app_name">Wallet</string>
     <string name="home">Home</string>
     <string name="card">Tarjeta</string>
     <string name="your_qr_code">Tu QR</string>

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.eldarwallet.databinding.ActivityMainBinding
 import com.eldarwallet.domain.usecases.UserUseCase
 import com.eldarwallet.ui.home.HomeActivity
@@ -22,8 +22,7 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*//To force app to only light mode
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)*/
+        installSplashScreen()
 
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
 
