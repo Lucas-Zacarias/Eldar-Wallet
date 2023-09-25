@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Eldar Wallet</string>
+    <string name="app_name">Wallet</string>
     <string name="home">Home</string>
     <string name="card">Tarjeta</string>
     <string name="your_qr_code">Tu QR</string>
@@ -36,7 +36,7 @@
     <string name="owner">Titular: %s %s</string>
     <string name="cvc_mayus">CVC %s</string>
     <string name="show_qr_code_to_receive_money">Mostrá este código QR para que te abonen</string>
-    <string name="charging_your_qr">Cargando tu QR...</string>
+    <string name="charging_your_qr">Cargando tu QR…</string>
     <string name="qr_code">Código QR</string>
     <string name="no_cards_added">No tenés tarjetas añadidas</string>
 </resources>
