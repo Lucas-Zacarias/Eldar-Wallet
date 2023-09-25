@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.eldarwallet"
+    namespace = "com.wallet"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.eldarwallet"
+        applicationId = "com.wallet"
         minSdk = 26
         targetSdk = 33
         versionCode = 1

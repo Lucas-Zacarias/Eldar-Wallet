@@ -5,7 +5,7 @@
     <!-- Splash Screen Theme. -->
     <style name="Theme.AppSplash" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="postSplashScreenTheme">@style/Theme.EldarWallet</item>
+        <item name="postSplashScreenTheme">@style/Theme.Wallet</item>
 
         <!-- Status bar and navigation bar -->
         <item name="android:statusBarColor" >@color/white</item>

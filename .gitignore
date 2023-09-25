@@ -17,3 +17,4 @@ local.properties
 
 # Secret
 app/src/main/java/com/eldarwallet/domain/models/Secrets.kt
+app/src/main/java/com/wallet/domain/models/Secrets.kt
