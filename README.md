@@ -22,7 +22,7 @@ Se debe tener:
 * Tener JAVA 17
 * Emulador Android con una API no menor a 26
 * Una API KEY de https://rapidapi.com/hub
-* Se debe crear una clase llamada Secrets en el package: com.eldarwallet.domain.models y debe tener la siguiente estructura
+* Se debe crear una clase llamada Secrets en el package: com.wallet.domain.models y debe tener la siguiente estructura
 
 
 ```
