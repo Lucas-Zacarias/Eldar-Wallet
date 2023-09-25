@@ -26,7 +26,7 @@ Se debe tener:
 
 
 ```
-package com.wallet.domain.models
+package com.eldarwallet.domain.models
 
 class Secrets {
 
