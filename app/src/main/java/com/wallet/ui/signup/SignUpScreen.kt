@@ -81,8 +81,7 @@ fun SignUpScreen(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.complete_all_fields),
-                    show = true
+                    stringResource(id = R.string.complete_all_fields)
                 )
             }
 
@@ -91,8 +90,7 @@ fun SignUpScreen(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.check_if_emails_match),
-                    show = true
+                    stringResource(id = R.string.check_if_emails_match)
                 )
             }
 
@@ -101,8 +99,7 @@ fun SignUpScreen(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.check_if_passwords_match),
-                    show = true
+                    stringResource(id = R.string.check_if_passwords_match)
                 )
             }
 
@@ -111,8 +108,7 @@ fun SignUpScreen(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.email_format),
-                    show = true
+                    stringResource(id = R.string.email_format)
                 )
             }
 
@@ -121,8 +117,7 @@ fun SignUpScreen(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.check_password_length),
-                    show = true
+                    stringResource(id = R.string.check_password_length)
                 )
             }
 
@@ -131,8 +126,7 @@ fun SignUpScreen(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.try_with_other_email),
-                    show = true
+                    stringResource(id = R.string.try_with_other_email)
                 )
             }
 

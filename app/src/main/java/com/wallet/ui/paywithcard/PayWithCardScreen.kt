@@ -284,7 +284,7 @@ private fun BackCard(cardData: CardInput) {
 @Composable
 private fun PayButton() {
     val context = LocalContext.current
-    var showDialog by remember { mutableStateOf(false) }
+    val isDialogShowing = remember { mutableStateOf(false) }
     var dialogMessage by remember { mutableStateOf("") }
 
     ReusableButton(
@@ -303,18 +303,18 @@ private fun PayButton() {
             } else {
                 context.getString(R.string.device_without_nfc)
             }
-            showDialog = !showDialog
+            isDialogShowing.value = true
         },
         text =
         stringResource(id = R.string.pay_with_nfc)
     )
 
-    if (showDialog) {
+    if (isDialogShowing.value) {
         ReusableDialog(
             title =
             stringResource(id = R.string.pay_with_nfc),
             text = dialogMessage,
-            show = true
+            isDialogShowing = isDialogShowing
         )
     }
 

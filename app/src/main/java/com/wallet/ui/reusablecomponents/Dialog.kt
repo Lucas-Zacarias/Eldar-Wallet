@@ -7,10 +7,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,23 +21,22 @@ import com.wallet.ui.theme.WalletTheme
 fun ReusableDialog(
     title: String,
     text: String,
-    show: Boolean,
     onConfirm: () -> Unit = {},
     ifConfirmOnlyToCloseDialog: Boolean = true,
-    hasCancelOption: Boolean = false
-) {
-    var showAlertDialog by remember {
-        mutableStateOf(show)
+    hasCancelOption: Boolean = false,
+    isDialogShowing: MutableState<Boolean> = remember {
+        mutableStateOf(true)
     }
+) {
 
-    if (showAlertDialog) {
+    if (isDialogShowing.value) {
         AlertDialog(
             dismissButton = {
 
                 if (hasCancelOption) {
                     TextButton(
                         onClick = {
-                            showAlertDialog = false
+                            isDialogShowing.value = false
                         }
                     ) {
                         Text(
@@ -55,11 +53,10 @@ fun ReusableDialog(
             {
                 TextButton(
                     onClick = {
-                        if (ifConfirmOnlyToCloseDialog) {
-                            showAlertDialog = false
-                        } else {
+                        if (!ifConfirmOnlyToCloseDialog) {
                             onConfirm()
                         }
+                        isDialogShowing.value = false
                     }
                 ) {
                     Text(
@@ -89,7 +86,7 @@ fun ReusableDialog(
             },
             shape = RoundedCornerShape(20.dp),
             onDismissRequest = {
-                showAlertDialog = false
+                isDialogShowing.value = false
             }
         )
     }
@@ -110,6 +107,11 @@ fun ReusableDialog(
 @Composable
 fun Preview() {
     WalletTheme {
-        ReusableDialog("Hola Dialog", "Cuerpo del Dialog", true, {})
+        ReusableDialog(
+            "Hola Dialog",
+            "Cuerpo del Dialog",
+            {},
+            isDialogShowing =
+            remember { mutableStateOf(false) })
     }
 }

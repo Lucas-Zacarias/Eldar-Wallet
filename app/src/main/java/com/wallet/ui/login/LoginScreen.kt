@@ -77,24 +77,24 @@ fun LoginScreen(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.complete_all_fields),
-                    show = true)
+                    stringResource(id = R.string.complete_all_fields)
+                )
             }
             LoginResult.EmailInvalid -> {
                 ReusableDialog(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.email_format),
-                    show = true)
+                    stringResource(id = R.string.email_format)
+                )
             }
             LoginResult.UserNotFound -> {
                 ReusableDialog(
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.credentials),
-                    show = true)
+                    stringResource(id = R.string.credentials)
+                )
             }
             else -> {}
         }

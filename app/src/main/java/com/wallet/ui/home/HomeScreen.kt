@@ -24,11 +24,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -81,7 +80,7 @@ private fun UserGreetings(
     userName: String?,
     signOffEvent: () -> Unit
 ) {
-    var isDialogShowing by remember { mutableStateOf(false) }
+    val isDialogShowing = remember { mutableStateOf(false) }
 
     Row(
         modifier = Modifier
@@ -102,7 +101,7 @@ private fun UserGreetings(
                     CircleShape
                 )
                 .clickable {
-                    isDialogShowing = !isDialogShowing
+                    isDialogShowing.value = true
                 },
             contentAlignment = Alignment.Center
         ) {
@@ -128,26 +127,30 @@ private fun UserGreetings(
 
     }
 
-    if (isDialogShowing) {
-        SignOffDialog(signOffEvent)
+    if (isDialogShowing.value) {
+        SignOffDialog(
+            signOffEvent,
+            isDialogShowing
+        )
     }
 }
 
 @Composable
 private fun SignOffDialog(
-    signOffEvent: () -> Unit
+    signOffEvent: () -> Unit,
+    isDialogShowing: MutableState<Boolean>
 ) {
     ReusableDialog(
         title =
         stringResource(id = R.string.sign_off),
         text =
         stringResource(id = R.string.sign_off_confirm),
-        show = true,
         hasCancelOption = true,
         ifConfirmOnlyToCloseDialog = false,
         onConfirm = {
             signOffEvent()
-        }
+        },
+        isDialogShowing = isDialogShowing
     )
 }
 

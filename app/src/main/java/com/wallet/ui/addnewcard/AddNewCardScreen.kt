@@ -47,6 +47,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.wallet.R
 import com.wallet.domain.models.CardInput
 import com.wallet.domain.models.CardType
 import com.wallet.domain.models.NewCardResult
@@ -54,7 +55,6 @@ import com.wallet.ui.reusablecomponents.HeightSpacer
 import com.wallet.ui.reusablecomponents.ReusableButton
 import com.wallet.ui.reusablecomponents.ReusableDialog
 import com.wallet.ui.reusablecomponents.ReusableOutlineTextField
-import com.wallet.R
 import kotlinx.coroutines.delay
 
 @Composable
@@ -105,8 +105,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
                     title = 
                     stringResource(id = R.string.check),
                     text = 
-                    stringResource(id = R.string.complete_all_fields),
-                    show = true)
+                    stringResource(id = R.string.complete_all_fields)
+                )
             }
 
             NewCardResult.OwnerNameInvalid, NewCardResult.OwnerInvalid -> {
@@ -114,8 +114,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.add_card_in_your_name),
-                    show = true)
+                    stringResource(id = R.string.add_card_in_your_name)
+                )
             }
 
             NewCardResult.NumberInvalid, NewCardResult.CardTypeInvalid -> {
@@ -123,8 +123,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.use_a_valid_card_number),
-                    show = true)
+                    stringResource(id = R.string.use_a_valid_card_number)
+                )
             }
 
             NewCardResult.MonthInvalid -> {
@@ -132,8 +132,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.not_use_an_expiration_month_before_the_current_date),
-                    show = true)
+                    stringResource(id = R.string.not_use_an_expiration_month_before_the_current_date)
+                )
             }
 
             NewCardResult.YearInvalid -> {
@@ -141,8 +141,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.not_use_an_expiration_year_before_the_current_date),
-                    show = true)
+                    stringResource(id = R.string.not_use_an_expiration_year_before_the_current_date)
+                )
             }
 
             NewCardResult.CVCLengthInvalid -> {
@@ -150,8 +150,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.use_a_valid_cvc),
-                    show = true)
+                    stringResource(id = R.string.use_a_valid_cvc)
+                )
             }
 
             NewCardResult.CardAlreadyAdded -> {
@@ -159,8 +159,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.card_already_added),
-                    show = true)
+                    stringResource(id = R.string.card_already_added)
+                )
             }
 
             NewCardResult.Error  -> {
@@ -168,8 +168,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
                     title =
                     stringResource(id = R.string.check),
                     text =
-                    stringResource(id = R.string.problem_not_detected),
-                    show = true)
+                    stringResource(id = R.string.problem_not_detected)
+                )
             }
 
             else -> {}
