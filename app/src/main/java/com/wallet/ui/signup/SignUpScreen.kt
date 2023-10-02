@@ -82,12 +82,6 @@ fun SignUpScreen(
                 ShowErrorDialog(
                     text = stringResource(id = R.string.complete_all_fields),
                     isDialogShowing = showErrorDialog)
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.complete_all_fields)
-                )
             }
 
             LoginResult.DistinctEmail -> {
