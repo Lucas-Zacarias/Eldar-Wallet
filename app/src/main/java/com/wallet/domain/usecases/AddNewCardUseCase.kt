@@ -65,7 +65,7 @@ class AddNewCardUseCase @Inject constructor(
 
         return if (yearExpiration.toInt() > year) {
             true
-        } else yearExpiration.toInt() == year && monthExpiration.toInt() > month
+        } else yearExpiration.toInt() == year && monthExpiration.toInt() in (month + 1)..12
     }
 
     private fun validateYear(yearExpiration: String): Boolean {

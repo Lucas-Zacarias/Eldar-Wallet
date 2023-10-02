@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -59,8 +60,9 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
-    val addNewCardState = viewModel.addNewCardState.observeAsState().value
+    val addNewCardState by viewModel.addNewCardState.observeAsState()
     val cardTypeState = viewModel.cardType.observeAsState().value
+    val showErrorDialog = remember { mutableStateOf(false) }
 
     Box(
         modifier =
@@ -88,7 +90,8 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
             AddNewCardForm(
                 viewModel,
                 addNewCardState,
-                cardTypeState
+                cardTypeState,
+                showErrorDialog
             )
 
         }
@@ -101,74 +104,58 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
             }
             
             NewCardResult.EmptyFields -> {
-                ReusableDialog(
-                    title = 
-                    stringResource(id = R.string.check),
-                    text = 
-                    stringResource(id = R.string.complete_all_fields)
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.complete_all_fields),
+                    isDialogShowing = showErrorDialog
                 )
             }
 
             NewCardResult.OwnerNameInvalid, NewCardResult.OwnerInvalid -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.add_card_in_your_name)
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.add_card_in_your_name),
+                    isDialogShowing = showErrorDialog
                 )
             }
 
             NewCardResult.NumberInvalid, NewCardResult.CardTypeInvalid -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.use_a_valid_card_number)
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.use_a_valid_card_number),
+                    isDialogShowing = showErrorDialog
                 )
             }
 
             NewCardResult.MonthInvalid -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.not_use_an_expiration_month_before_the_current_date)
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.not_use_an_expiration_month_before_the_current_date),
+                    isDialogShowing = showErrorDialog
                 )
             }
 
             NewCardResult.YearInvalid -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.not_use_an_expiration_year_before_the_current_date)
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.not_use_an_expiration_year_before_the_current_date),
+                    isDialogShowing = showErrorDialog
                 )
             }
 
             NewCardResult.CVCLengthInvalid -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.use_a_valid_cvc)
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.use_a_valid_cvc),
+                    isDialogShowing = showErrorDialog
                 )
             }
 
             NewCardResult.CardAlreadyAdded -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.card_already_added)
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.card_already_added),
+                    isDialogShowing = showErrorDialog
                 )
             }
 
-            NewCardResult.Error  -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.problem_not_detected)
+            NewCardResult.Error -> {
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.problem_not_detected),
+                    isDialogShowing = showErrorDialog
                 )
             }
 
@@ -176,6 +163,18 @@ fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
         }
 
     }
+}
+
+@Composable
+private fun ShowErrorDialog(
+    text: String,
+    isDialogShowing: MutableState<Boolean>
+) {
+    ReusableDialog(
+        title = stringResource(id = R.string.check),
+        text = text,
+        isDialogShowing = isDialogShowing
+    )
 }
 
 @Composable
@@ -227,7 +226,8 @@ private fun CardImage(cardTypeState: CardType?) {
 private fun AddNewCardForm(
     viewModel: AddNewCardViewModel,
     addNewCardState: NewCardResult?,
-    cardTypeState: CardType?
+    cardTypeState: CardType?,
+    showErrorDialog: MutableState<Boolean>
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -430,6 +430,7 @@ private fun AddNewCardForm(
                     type = cardType
                 )
             )
+            showErrorDialog.value = true
         },
         text =
         stringResource(id = R.string.add)

@@ -17,8 +17,8 @@ class AddNewCardViewModel @Inject constructor(
     private val addNewCardUseCase: AddNewCardUseCase
 ): ViewModel() {
 
-    private var _addNewCardState = MutableLiveData<NewCardResult>()
-    val addNewCardState: LiveData<NewCardResult>
+    private var _addNewCardState = MutableLiveData<NewCardResult?>()
+    val addNewCardState: LiveData<NewCardResult?>
         get() = _addNewCardState
 
     private var _cardType = MutableLiveData<CardType>()
@@ -27,6 +27,7 @@ class AddNewCardViewModel @Inject constructor(
 
     fun validateAddNewCard(cardInput: CardInput) {
         viewModelScope.launch {
+            _addNewCardState.value = null
             val result = addNewCardUseCase.addNewCard(cardInput)
 
             _addNewCardState.value = result
