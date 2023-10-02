@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -51,6 +52,7 @@ fun SignUpScreen(
     viewModel: SignUpViewModel
 ) {
     val signUpState = viewModel.signUpState.observeAsState().value
+    val showErrorDialog = remember { mutableStateOf(false) }
 
     Box(
         modifier =
@@ -68,7 +70,7 @@ fun SignUpScreen(
         ) {
             LogoApp()
             CreateAccountMessage()
-            SignUpForm(goToLoginEvent, viewModel)
+            SignUpForm(goToLoginEvent, viewModel, showErrorDialog)
         }
 
         when (signUpState) {
@@ -77,6 +79,9 @@ fun SignUpScreen(
             }
 
             LoginResult.EmptyFields -> {
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.complete_all_fields),
+                    isDialogShowing = showErrorDialog)
                 ReusableDialog(
                     title =
                     stringResource(id = R.string.check),
@@ -86,53 +91,50 @@ fun SignUpScreen(
             }
 
             LoginResult.DistinctEmail -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.check_if_emails_match)
-                )
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.check_if_emails_match),
+                    isDialogShowing = showErrorDialog)
             }
 
             LoginResult.DistinctPassword -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.check_if_passwords_match)
-                )
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.check_if_passwords_match),
+                    isDialogShowing = showErrorDialog)
             }
 
             LoginResult.EmailInvalid -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.email_format)
-                )
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.email_format),
+                    isDialogShowing = showErrorDialog)
             }
 
             LoginResult.PasswordInvalid -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.check_password_length)
-                )
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.check_password_length),
+                    isDialogShowing = showErrorDialog)
             }
 
             LoginResult.ExistingUser -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.try_with_other_email)
-                )
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.try_with_other_email),
+                    isDialogShowing = showErrorDialog)
             }
 
             else -> {}
         }
     }
+}
+
+@Composable
+private fun ShowErrorDialog(
+    text: String,
+    isDialogShowing: MutableState<Boolean>
+) {
+    ReusableDialog(
+        title = stringResource(id = R.string.check),
+        text = text,
+        isDialogShowing = isDialogShowing
+    )
 }
 
 @Composable
@@ -164,7 +166,8 @@ private fun CreateAccountMessage() {
 @Composable
 private fun SignUpForm(
     goToLoginEvent: () -> Unit,
-    viewModel: SignUpViewModel
+    viewModel: SignUpViewModel,
+    showErrorDialog: MutableState<Boolean>
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -324,6 +327,7 @@ private fun SignUpForm(
                     passwordConfirm = confirmPassword
                 )
             )
+            showErrorDialog.value = true
         },
         text =
         stringResource(id = R.string.sign_up)

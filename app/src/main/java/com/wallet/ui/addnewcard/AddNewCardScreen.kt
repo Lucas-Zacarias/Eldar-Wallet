@@ -60,7 +60,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun AddNewCardScreen(viewModel: AddNewCardViewModel) {
-    val addNewCardState by viewModel.addNewCardState.observeAsState()
+    val addNewCardState = viewModel.addNewCardState.observeAsState().value
     val cardTypeState = viewModel.cardType.observeAsState().value
     val showErrorDialog = remember { mutableStateOf(false) }
 

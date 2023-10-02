@@ -16,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -48,6 +49,7 @@ fun LoginScreen(
     viewModel: LogInViewModel
 ) {
     val loginState = viewModel.logInState.observeAsState().value
+    val showErrorDialog = remember { mutableStateOf(false) }
 
     Box(
         modifier =
@@ -64,7 +66,7 @@ fun LoginScreen(
         ) {
             LogoApp()
             WelcomeGreeting()
-            LoginForm(signUpEvent, viewModel)
+            LoginForm(signUpEvent, viewModel, showErrorDialog)
         }
 
         when(loginState) {
@@ -73,32 +75,35 @@ fun LoginScreen(
             }
 
             LoginResult.EmptyFields -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.complete_all_fields)
-                )
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.complete_all_fields),
+                    isDialogShowing = showErrorDialog)
             }
             LoginResult.EmailInvalid -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.email_format)
-                )
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.email_format),
+                    isDialogShowing = showErrorDialog)
             }
             LoginResult.UserNotFound -> {
-                ReusableDialog(
-                    title =
-                    stringResource(id = R.string.check),
-                    text =
-                    stringResource(id = R.string.credentials)
-                )
+                ShowErrorDialog(
+                    text = stringResource(id = R.string.credentials),
+                    isDialogShowing = showErrorDialog)
             }
             else -> {}
         }
     }
+}
+
+@Composable
+private fun ShowErrorDialog(
+    text: String,
+    isDialogShowing: MutableState<Boolean>
+) {
+    ReusableDialog(
+        title = stringResource(id = R.string.check),
+        text = text,
+        isDialogShowing = isDialogShowing
+    )
 }
 
 @Composable
@@ -130,7 +135,8 @@ private fun WelcomeGreeting() {
 @Composable
 private fun LoginForm(
     signUpEvent: () -> Unit,
-    logInViewModel: LogInViewModel
+    logInViewModel: LogInViewModel,
+    showErrorDialog: MutableState<Boolean>
 ) {
     val focusManager = LocalFocusManager.current
     var email by remember { mutableStateOf("") }
@@ -194,6 +200,7 @@ private fun LoginForm(
                     password = password
                 )
             )
+            showErrorDialog.value = true
         },
         text =
         stringResource(id = R.string.log_in)

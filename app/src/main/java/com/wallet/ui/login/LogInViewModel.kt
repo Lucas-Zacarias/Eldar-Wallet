@@ -16,12 +16,13 @@ class LogInViewModel @Inject constructor(
     private val logInUseCase: LogInUseCase
 ): ViewModel() {
 
-    private var _logInState = MutableLiveData<LoginResult>()
-    val logInState: LiveData<LoginResult>
+    private var _logInState = MutableLiveData<LoginResult?>()
+    val logInState: LiveData<LoginResult?>
         get() = _logInState
 
     fun validateLogIn(userLogIn: UserLogIn) {
         viewModelScope.launch {
+            _logInState.value = null
             val result = logInUseCase.logIn(userLogIn)
 
             if(result == LoginResult.Success) {

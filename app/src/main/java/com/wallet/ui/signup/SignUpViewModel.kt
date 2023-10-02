@@ -16,12 +16,13 @@ class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase
 ): ViewModel() {
 
-    private var _signUpState = MutableLiveData<LoginResult>()
-    val signUpState: LiveData<LoginResult>
+    private var _signUpState = MutableLiveData<LoginResult?>()
+    val signUpState: LiveData<LoginResult?>
         get() = _signUpState
 
     fun validateSignUpForm(userSignUp: UserSignUp){
         viewModelScope.launch {
+            _signUpState.value = null
             val result = signUpUseCase.signUp(userSignUp)
 
             if(result == LoginResult.Success) {
