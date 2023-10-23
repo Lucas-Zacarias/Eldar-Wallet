@@ -3,6 +3,7 @@ package com.wallet.ui.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -24,10 +26,13 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,8 +50,10 @@ import com.wallet.R
 import com.wallet.domain.models.Card
 import com.wallet.domain.models.CardType
 import com.wallet.domain.usecases.EncryptionUseCase
+import com.wallet.ui.reusablecomponents.AnimatedCardShimmer
 import com.wallet.ui.reusablecomponents.ReusableCardItem
 import com.wallet.ui.reusablecomponents.ReusableDialog
+import kotlinx.coroutines.delay
 
 @Composable
 fun HomeScreen(
@@ -203,6 +210,12 @@ private fun UserCards(
     goToPayEvent: (ByteArray) -> Unit
 ) {
     val cards = viewModel.cardList.observeAsState().value
+    var showCards by remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = Unit) {
+        delay(2000)
+        showCards = true
+    }
 
     Column {
 
@@ -217,13 +230,29 @@ private fun UserCards(
             textAlign = TextAlign.Start
         )
 
-        if (cards?.isNotEmpty() == true) {
-            CardList(cards, goToPayEvent)
+        if (!showCards) {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Row(
+                    modifier = Modifier
+                        .horizontalScroll(rememberScrollState())
+                        .padding(start = 20.dp, end = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    repeat(5) {
+                        AnimatedCardShimmer()
+                    }
+                }
+            }
         } else {
-            NoCardsAdded()
+            if (cards?.isNotEmpty() == true) {
+                CardList(cards, goToPayEvent)
+            } else {
+                NoCardsAdded()
+            }
         }
 
     }
+
 }
 
 @Composable
