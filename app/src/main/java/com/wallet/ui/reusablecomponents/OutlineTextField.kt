@@ -20,6 +20,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,7 +42,9 @@ fun ReusableOutlineTextField(
     onVisibilityChange: (Boolean) -> Unit = {},
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    maxLength: Int = 50
+    maxLength: Int = 50,
+    focusRequester: FocusRequester = FocusRequester(),
+    onFocusChanged: () -> Unit = {}
 ) {
     var isNotFocused by remember { mutableStateOf(false) }
 
@@ -71,8 +75,12 @@ fun ReusableOutlineTextField(
         modifier =
         Modifier
             .fillMaxWidth()
+            .focusRequester(focusRequester)
             .onFocusChanged {
-                            isNotFocused = !isNotFocused
+                isNotFocused = !isNotFocused
+                if(it.isFocused) {
+                    onFocusChanged()
+                }
             },
         trailingIcon = {
             if (isPasswordField) {
@@ -88,7 +96,7 @@ fun ReusableOutlineTextField(
                         contentDescription =
                         stringResource(id = R.string.ic_visibility),
                         tint =
-                        if(!isNotFocused)
+                        if (!isNotFocused)
                             MaterialTheme.colorScheme.primary
                         else
                             MaterialTheme.colorScheme.tertiary

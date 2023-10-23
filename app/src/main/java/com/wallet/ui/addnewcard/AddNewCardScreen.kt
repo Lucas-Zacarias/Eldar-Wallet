@@ -2,6 +2,7 @@ package com.wallet.ui.addnewcard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,9 +32,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -53,6 +57,7 @@ import com.wallet.domain.models.CardInput
 import com.wallet.domain.models.CardType
 import com.wallet.domain.models.NewCardResult
 import com.wallet.ui.reusablecomponents.HeightSpacer
+import com.wallet.ui.reusablecomponents.MonthPicker
 import com.wallet.ui.reusablecomponents.ReusableButton
 import com.wallet.ui.reusablecomponents.ReusableDialog
 import com.wallet.ui.reusablecomponents.ReusableOutlineTextField
@@ -221,7 +226,7 @@ private fun CardImage(cardTypeState: CardType?) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun AddNewCardForm(
     viewModel: AddNewCardViewModel,
@@ -234,12 +239,15 @@ private fun AddNewCardForm(
     var name by remember { mutableStateOf("") }
     var surname by remember { mutableStateOf("") }
     var number by remember { mutableStateOf("") }
-    var expirationMonth by remember { mutableStateOf("") }
-    var expirationYear by remember { mutableStateOf("") }
+    val expirationMonth = remember { mutableStateOf("") }
+    val expirationYear = remember { mutableStateOf("") }
     var cvc by remember { mutableStateOf("") }
     var cvcVisibility by remember { mutableStateOf(false) }
     var cardType by remember { mutableStateOf(CardType.NOT_DEFINED) }
     cardType = cardTypeState ?: CardType.NOT_DEFINED
+    val datePickerVisibility = remember { mutableStateOf(false) }
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     ReusableOutlineTextField(
         value =
@@ -300,8 +308,10 @@ private fun AddNewCardForm(
         ),
         keyboardActions =
         KeyboardActions(
-            onNext =
-            { focusManager.moveFocus(FocusDirection.Down) }
+            onNext = {
+                datePickerVisibility.value = true
+                focusManager.clearFocus()
+            }
         ),
         maxLength = 16)
 
@@ -313,10 +323,10 @@ private fun AddNewCardForm(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         OutlinedTextField(
-            value = expirationMonth,
+            value = expirationMonth.value,
             onValueChange = { newValue: String ->
                 if (newValue.length <= 2) {
-                    expirationMonth = newValue
+                    expirationMonth.value = newValue
                 }
             },
             label = {
@@ -329,32 +339,24 @@ private fun AddNewCardForm(
             RoundedCornerShape(10.dp),
             colors =
             TextFieldDefaults.outlinedTextFieldColors(
-                textColor = MaterialTheme.colorScheme.primary,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.tertiary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.tertiary,
-                cursorColor = MaterialTheme.colorScheme.primary
-            ),
-            keyboardOptions =
-            KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Next
-            ),
-            keyboardActions =
-            KeyboardActions(
-                onNext =
-                { focusManager.moveFocus(FocusDirection.Next) }
+                disabledBorderColor = MaterialTheme.colorScheme.tertiary,
+                disabledLabelColor = MaterialTheme.colorScheme.tertiary,
+                disabledTextColor = MaterialTheme.colorScheme.primary
             ),
             singleLine = true,
-            modifier = Modifier.width(150.dp)
+            modifier = Modifier
+                .width(150.dp)
+                .clickable {
+                    datePickerVisibility.value = true
+                },
+            enabled = false
         )
 
         OutlinedTextField(
-            value = expirationYear,
+            value = expirationYear.value,
             onValueChange = { newValue: String ->
                 if (newValue.length <= 4) {
-                    expirationYear = newValue
+                    expirationYear.value = newValue
                 }
             },
             label = {
@@ -367,25 +369,17 @@ private fun AddNewCardForm(
             RoundedCornerShape(10.dp),
             colors =
             TextFieldDefaults.outlinedTextFieldColors(
-                textColor = MaterialTheme.colorScheme.primary,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.tertiary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.tertiary,
-                cursorColor = MaterialTheme.colorScheme.primary
-            ),
-            keyboardOptions =
-            KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Next
-            ),
-            keyboardActions =
-            KeyboardActions(
-                onNext =
-                { focusManager.moveFocus(FocusDirection.Down) }
+                disabledBorderColor = MaterialTheme.colorScheme.tertiary,
+                disabledLabelColor = MaterialTheme.colorScheme.tertiary,
+                disabledTextColor = MaterialTheme.colorScheme.primary
             ),
             singleLine = true,
-            modifier = Modifier.width(150.dp)
+            modifier = Modifier
+                .width(150.dp)
+                .clickable {
+                    datePickerVisibility.value = true
+                },
+            enabled = false
         )
     }
     
@@ -413,7 +407,12 @@ private fun AddNewCardForm(
         isPasswordVisible =
         cvcVisibility,
         onVisibilityChange =
-        { cvcVisibility = it })
+        { cvcVisibility = it },
+        focusRequester = focusRequester,
+        onFocusChanged = {
+            keyboardController?.show()
+        }
+    )
 
     HeightSpacer(height = 30)
 
@@ -424,8 +423,8 @@ private fun AddNewCardForm(
                     name = name,
                     surname = surname,
                     number = number,
-                    month = expirationMonth,
-                    year = expirationYear,
+                    month = expirationMonth.value,
+                    year = expirationYear.value,
                     cvc = cvc,
                     type = cardType
                 )
@@ -442,12 +441,21 @@ private fun AddNewCardForm(
         name = ""
         surname = ""
         number = ""
-        expirationMonth = ""
-        expirationYear = ""
+        expirationMonth.value = ""
+        expirationYear.value = ""
         cvc = ""
         cvcVisibility = false
         cardType = CardType.NOT_DEFINED
+        focusManager.clearFocus()
     }
+
+    CardDatePicker(
+        datePickerVisibility = datePickerVisibility,
+        expirationMonth = expirationMonth,
+        expirationYear = expirationYear,
+        focusRequester = focusRequester
+    )
+
 }
 
 @Composable
@@ -467,4 +475,24 @@ private fun NewCardAdded(modifier: Modifier) {
             modifier = modifier
         )
     }
+}
+
+@Composable
+private fun CardDatePicker(
+    datePickerVisibility: MutableState<Boolean>,
+    expirationMonth: MutableState<String>,
+    expirationYear: MutableState<String>,
+    focusRequester: FocusRequester
+) {
+    MonthPicker(
+        visible =
+        datePickerVisibility,
+        confirmButtonCLicked = { monthSelected, yearSelected ->
+            expirationMonth.value = monthSelected
+            expirationYear.value = yearSelected
+        },
+        moveFocusEvent = {
+            focusRequester.requestFocus()
+        }
+    )
 }

@@ -65,4 +65,16 @@
     <string name="searching_devices_to_pay">Buscando dispositivo para pagar…</string>
     <string name="nfc_off">No tenés el NFC encendido</string>
     <string name="device_without_nfc">Tu dispositivo no cuenta con NFC</string>
+    <string name="january_short">ENE</string>
+    <string name="february_short">FEB</string>
+    <string name="march_short">MAY</string>
+    <string name="april_short">ABR</string>
+    <string name="may_short">MAY</string>
+    <string name="june_short">JUN</string>
+    <string name="july_short">JUL</string>
+    <string name="august_short">AGO</string>
+    <string name="september_short">SEP</string>
+    <string name="october_short">OCT</string>
+    <string name="november_short">NOV</string>
+    <string name="december_short">DIC</string>
 </resources>

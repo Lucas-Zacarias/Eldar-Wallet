@@ -117,6 +117,9 @@ dependencies {
 
     //Splash screen
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //FlowLayout
+    implementation("com.google.accompanist:accompanist-flowlayout:0.27.0")
 }
 
 kapt {
