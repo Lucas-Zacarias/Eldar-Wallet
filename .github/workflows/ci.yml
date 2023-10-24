@@ -2,9 +2,9 @@ name: Wallet CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "improvent/migration-compose" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "improvent/migration-compose" ]
 
  
 jobs:
