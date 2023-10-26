@@ -51,6 +51,16 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: apk
+
+      - name: Checkout
+        uses: actions/checkout@v3
+          
+      - name: Get Version Name
+        id: get_version
+        run: |
+          VERSION_NAME=$(grep "versionName = " app/build.gradle.kts | awk '{print $3}' | tr -d "\"")
+          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+          echo "Version Name is $VERSION_NAME"
           
       - name: Create Release
         id: create_release
@@ -58,8 +68,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          tag_name: 11
-          release_name: ${{ github.event.repository.name }} v11
+          tag_name: ${{ env_VERSION_NAME }}
+          release_name: ${{ github.event.repository.name }} v${{ github.run_number }}
 
       - name: Upload Release APK
         id: upload_release_asset
