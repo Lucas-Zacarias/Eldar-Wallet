@@ -65,7 +65,7 @@ jobs:
       - name: Watch Version Name
         id: watch_version_name
         run: |
-          echo "Version name obtained is ${{ steps.get_version.outputs.VERSION_NAME }}"
+          echo ${{ steps.get_version.outputs.VERSION_NAME }}
           
       - name: Create Release
         id: create_release
