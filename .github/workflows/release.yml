@@ -60,6 +60,7 @@ jobs:
         run: |
           VERSION_NAME=$(grep "versionName = " app/build.gradle.kts | awk '{print $3}' | tr -d "\"")
           echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+          echo "Version Name is $VERSION_NAME"
           
       - name: Create Release
         id: create_release
