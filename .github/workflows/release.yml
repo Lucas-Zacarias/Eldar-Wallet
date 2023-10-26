@@ -52,14 +52,21 @@ jobs:
         with:
           name: apk
           
+      - name: Get Version Name
+        id: get_version
+        run: |
+          VERSION_NAME=$(grep "versionName = " app/build.gradle.kts | awk '{print $3}' | tr -d "\"")
+          echo "::set-output name=VERSION_NAME::$VERSION_NAME"
+          
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          TAG_NAME: ${{ steps.get_version.outputs.VERSION_NAME }}
         with:
-          tag_name: ${{ env.VERSION_NAME }}
-          release_name: ${{ github.event.repository.name }} v${{ env.VERSION_NAME }}
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ github.event.repository.name }} v${{ env.TAG_NAME }}
 
       - name: Upload Release APK
         id: upload_release_asset
