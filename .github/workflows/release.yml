@@ -5,6 +5,7 @@ on:
     branches: [ "release" ]
     tags:
       - "v*"
+    tags-ignore: ${{ github.ref }}
 
  
 jobs:
