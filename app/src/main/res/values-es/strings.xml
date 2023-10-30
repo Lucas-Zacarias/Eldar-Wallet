@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Wallet</string>
     <string name="home">Home</string>
@@ -21,11 +22,8 @@
     <string name="balance">Saldo</string>
     <string name="your_cards">Tus tarjetas</string>
     <string name="card_image">Imagen de tarjeta</string>
-    <string name="example_hided_card_number" translatable="false">**** **** **** 1234</string>
     <string name="complete_to_add_new_card">Completá para añadir una nueva tarjeta</string>
     <string name="add">Añadir</string>
-    <string name="prefs_file" translatable="false">com.wallet.PREFERENCES_FILE_KEY</string>
-    <string name="user_default_balance" translatable="false">$0</string>
     <string name="hello">"Hola"</string>
     <string name="log_out">Cerrar Sesión</string>
     <string name="button_to_close">Botón para cerrar ventana</string>
@@ -34,14 +32,12 @@
     <string name="button_to_flip_card">Botón para voltear tarjeta</string>
     <string name="pay_with_nfc">Pagar con NFC</string>
     <string name="owner">Titular: %s %s</string>
-    <string name="cvc_mayus" translatable="false">CVC %s</string>
     <string name="show_qr_code_to_receive_money">Mostrá este código QR para que te abonen</string>
     <string name="charging_your_qr">Cargando tu QR…</string>
     <string name="qr_code">Código QR</string>
     <string name="no_cards_added">No tenés tarjetas añadidas</string>
     <string name="ic_visibility">Ícono que cambia la visibilidad del campo contraseña</string>
     <string name="welcome_greeting">Bienvenido de nuevo</string>
-    <string name="ok" translatable="false">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="check">Revisar</string>
     <string name="complete_all_fields">Completar todos los campos</string>
