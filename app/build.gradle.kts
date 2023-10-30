@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.eldarwallet"
+    namespace = "com.wallet"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.eldarwallet"
+        applicationId = "com.wallet"
         minSdk = 26
         targetSdk = 33
-        versionCode = 2
-        versionName = "1.0.1"
+        versionCode = 3
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -55,8 +55,6 @@ android {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     val dagger_hilt_version = "2.44"
     val room_version = "2.5.2"
     val retrofit_version = "2.9.0"
@@ -78,6 +76,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:$dagger_hilt_version")
@@ -102,6 +102,24 @@ dependencies {
 
     //Material
     implementation("com.google.android.material:material:1.9.0")
+
+    //Constraint Layout for compose
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+    //Jetpack Compose Icons
+    implementation("androidx.compose.material:material-icons-extended:1.4.3")
+
+    //Live data with compose
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.1")
+
+    //Lottie animations
+    implementation("com.airbnb.android:lottie-compose:6.0.0")
+
+    //Splash screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //FlowLayout
+    implementation("com.google.accompanist:accompanist-flowlayout:0.27.0")
 }
 
 kapt {

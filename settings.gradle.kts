@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Eldar Wallet"
+rootProject.name = "Wallet"
 include(":app")
