@@ -1,7 +1,7 @@
 name: Wallet Build and Release
 
 on:
-  push:
+  pull_request:
     branches: [ "release" ]
     tags:
       - "v*"
