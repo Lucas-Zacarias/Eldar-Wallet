@@ -31,7 +31,7 @@ class GenerateQRUseCase @Inject constructor(
         return if (getUserName() != null && getUserSurname() != null) {
             getUserName().plus(" ").plus(getUserSurname())
         } else {
-            "Eldar Wallet"
+            "Wallet"
         }
     }
 

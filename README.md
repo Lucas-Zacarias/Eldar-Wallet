@@ -11,7 +11,7 @@ Para descargar este proyecto se puede hacer de 2 formas:
 ```bash
   Descargar el archivo .zip
 ```
-    
+
 ```bash
   Hacer un git clone de:
   https://github.com/Lucas-Zacarias/Wallet.git
@@ -37,4 +37,3 @@ class Secrets {
 
 }
 ```
-
