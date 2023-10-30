@@ -3,9 +3,6 @@ name: Wallet Build and Release
 on:
   push:
     branches: [ "release" ]
-    tags:
-      - "v*"
-    tags-ignore: ${{ github.ref }}
 
  
 jobs:
