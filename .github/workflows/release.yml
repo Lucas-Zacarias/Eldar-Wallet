@@ -21,12 +21,12 @@ jobs:
           cache: gradle
           
       - name: Create file Secrets.kt
-        run: touch ./app/src/main/java/com/eldarwallet/domain/models/Secrets.kt
+        run: touch ./app/src/main/java/com/wallet/domain/models/Secrets.kt
         
       - name: Putting data secrets
         env:
           DATA: ${{ secrets.SECRETS }}
-        run: echo $DATA | base64 -d > ./app/src/main/java/com/eldarwallet/domain/models/Secrets.kt
+        run: echo $DATA | base64 -d > ./app/src/main/java/com/wallet/domain/models/Secrets.kt
         
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
